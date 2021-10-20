@@ -49,7 +49,6 @@ class AuthenticateUserService {
       });
     }
 
-
     const token = sign(
       {
         user: {
@@ -64,8 +63,6 @@ class AuthenticateUserService {
         expiresIn: '1d'
       }
     );
-
-
 
     return { token, user };
   }

@@ -15,6 +15,7 @@ model User {
   login      String
 
   messages Message[]
+
   @@map("users")
 }
 
