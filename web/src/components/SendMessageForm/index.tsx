@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { VscGithubInverted, VscSignOut } from 'react-icons/vsc';
+import { toast } from 'react-toastify';
 import { useAuth } from '../../hooks/useAuth';
 import { api } from '../../services/api';
 import styles from './styles.module.scss';
@@ -20,9 +21,11 @@ export function SendMessageForm() {
     api.post("/messages", { message })
       .then(() => {
         setMessage('')
+
+        toast.success('Mensagem enviada com sucesso');
       })
       .catch(err => {
-        alert(err)
+        toast.error(err.response.data.error)
       })
   }
 

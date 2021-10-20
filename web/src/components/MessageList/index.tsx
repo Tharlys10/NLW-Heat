@@ -52,7 +52,7 @@ export function MessageList() {
         setMessages(data)
       })
       .catch(err => {
-        alert("Error: " + err)
+        toast.error(err.response.data.error)
       })
   }, [])
 

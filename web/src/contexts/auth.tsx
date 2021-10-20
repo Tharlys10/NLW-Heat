@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { api } from "../services/api";
 
 type User = {
@@ -40,6 +41,8 @@ export function AuthProvider(props: AuthProviderProps) {
     api.defaults.headers.common.authorization = `Bearer ${token}`;
 
     setUser(user);
+
+    toast.success(`Bem vindo! ${user.name}`);
   }
 
   function signOut() {
@@ -69,9 +72,11 @@ export function AuthProvider(props: AuthProviderProps) {
       api.get<User>("/users/profile")
         .then(({ data }) => {
           setUser(data)
+
+          toast.success(`Bem vindo novamente, ${data.name}`);
         })
         .catch(err => {
-          alert(err)
+          toast.error(err.response.data.error)
         })
     }
   }, []);
