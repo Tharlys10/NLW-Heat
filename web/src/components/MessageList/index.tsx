@@ -6,6 +6,7 @@ import { api } from '../../services/api';
 import logoImg from '../../assets/logo.svg';
 
 import styles from './styles.module.scss';
+import { toast } from 'react-toastify';
 
 type User = {
   id: string,
@@ -44,6 +45,8 @@ export function MessageList() {
         messagesQueue.shift();
       }
     }, 1000)
+
+    return () => clearInterval(timer)
   }, [])
 
   useEffect(() => {
